@@ -75,26 +75,51 @@ export default function ContactForm({ lang = 'ko' }: ContactFormProps) {
   }
 
   return (
-    <form ref={formRef} className="space-y-5" onSubmit={handleSubmit}>
+    <form ref={formRef} className="space-y-4 sm:space-y-5" onSubmit={handleSubmit}>
       <div>
         <label htmlFor="name" className="block text-sm font-medium text-blue-900 mb-1">{t[lang].name}</label>
-        <input type="text" id="name" name="name" required className="w-full border border-blue-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder={t[lang].namePh} />
+        <input 
+          type="text" 
+          id="name" 
+          name="name" 
+          required 
+          className="w-full border border-blue-200 rounded-lg px-3 sm:px-4 py-2.5 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-300" 
+          placeholder={t[lang].namePh} 
+        />
       </div>
       <div>
         <label htmlFor="email" className="block text-sm font-medium text-blue-900 mb-1">{t[lang].email}</label>
-        <input type="email" id="email" name="email" required className="w-full border border-blue-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder={t[lang].emailPh} />
+        <input 
+          type="email" 
+          id="email" 
+          name="email" 
+          required 
+          className="w-full border border-blue-200 rounded-lg px-3 sm:px-4 py-2.5 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-300" 
+          placeholder={t[lang].emailPh} 
+        />
       </div>
       <div>
         <label htmlFor="message" className="block text-sm font-medium text-blue-900 mb-1">{t[lang].message}</label>
-        <textarea id="message" name="message" rows={4} required className="w-full border border-blue-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300" placeholder={t[lang].messagePh} />
+        <textarea 
+          id="message" 
+          name="message" 
+          rows={4} 
+          required 
+          className="w-full border border-blue-200 rounded-lg px-3 sm:px-4 py-2.5 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-300" 
+          placeholder={t[lang].messagePh} 
+        />
       </div>
       {/* reCAPTCHA v2 invisible 스크립트 */}
       <div id="recaptcha-container"></div>
-      <button type="submit" disabled={loading} className="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 rounded-lg transition disabled:opacity-60 disabled:cursor-not-allowed">
+      <button 
+        type="submit" 
+        disabled={loading} 
+        className="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-2.5 sm:py-3 rounded-lg transition disabled:opacity-60 disabled:cursor-not-allowed text-sm sm:text-base mt-2"
+      >
         {loading ? t[lang].sending : t[lang].send}
       </button>
-      {success && <div className="text-green-600 text-sm mt-2">{t[lang].success}</div>}
-      {error && <div className="text-red-600 text-sm mt-2">{error}</div>}
+      {success && <div className="text-green-600 text-xs sm:text-sm mt-2 text-center">{t[lang].success}</div>}
+      {error && <div className="text-red-600 text-xs sm:text-sm mt-2 text-center">{error}</div>}
     </form>
   );
 }

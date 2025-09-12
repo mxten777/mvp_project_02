@@ -1,67 +1,38 @@
-import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import DarkModeToggle from "@/components/ui/DarkModeToggle";
+"use client";
+import React, { useState } from "react";
 import LangToggle from "@/components/ui/LangToggle";
-
-
-const navItemsKo = [
-  { label: "홈", href: "#" },
-  { label: "서비스", href: "#services" },
-  { label: "포트폴리오", href: "#portfolio" },
-  { label: "공지사항", href: "#news" },
-  { label: "문의", href: "#contact" },
-];
-const navItemsEn = [
-  { label: "Home", href: "#" },
-  { label: "Services", href: "#services" },
-  { label: "Portfolio", href: "#portfolio" },
-  { label: "News", href: "#news" },
-  { label: "Contact", href: "#contact" },
-];
-
+import DarkModeToggle from "@/components/ui/DarkModeToggle";
 
 export default function Header() {
-  const [scrolled, setScrolled] = useState(false);
-  const [lang, setLang] = useState<'ko' | 'en'>("ko");
-
-  useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const [lang, setLang] = useState<"ko" | "en">("ko");
 
   return (
-    <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-white/90 shadow-lg backdrop-blur border-b border-blue-100"
-          : "bg-transparent"
-      }`}
-    >
-      <nav className="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
+    <header className="sticky top-0 z-40 w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur shadow-sm border-b border-slate-200 dark:border-slate-800 transition-all">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between h-16">
+        <a href="/" className="flex items-center gap-2 group py-2.5 px-1">
+          <img src="/file.svg" alt="만송시스템 로고" className="w-8 h-8" />
+          <span className="text-xl font-bold tracking-tight group-hover:text-blue-700 transition">만송시스템</span>
+        </a>
+        <nav className="hidden md:flex gap-6 text-base font-medium">
+          <a href="/" className="hover:text-blue-600 transition py-2.5 px-2">홈</a>
+          <a href="/order" className="hover:text-blue-600 transition py-2.5 px-2">주문</a>
+          <a href="/admin" className="hover:text-blue-600 transition py-2.5 px-2">관리자</a>
+          <a href="#contact" className="hover:text-blue-600 transition py-2.5 px-2">문의</a>
+        </nav>
         <div className="flex items-center gap-2">
-          <img src="/file.svg" alt="만송시스템" className="w-8 h-8" />
-          <span className="text-xl font-bold text-blue-900 tracking-tight">만송시스템</span>
-        </div>
-        <ul className="hidden md:flex gap-8 text-blue-900 font-semibold">
-          {(lang === "ko" ? navItemsKo : navItemsEn).map((item) => (
-            <li key={item.label}>
-              <a href={item.href} className="hover:text-blue-700 transition-colors">
-                {item.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-        <div className="flex items-center">
           <LangToggle lang={lang} setLang={setLang} />
           <DarkModeToggle />
-          <div className="md:hidden">
-            {/* 모바일 메뉴(추후 구현) */}
-          </div>
+          <a href="#contact" className="ml-2 px-4 py-2.5 rounded bg-blue-600 text-white font-semibold shadow hover:bg-blue-700 transition hidden sm:inline-block min-w-[90px] text-center">
+            상담 문의
+          </a>
+          {/* 모바일 메뉴 버튼 - 터치 영역 확대 */}
+          <button className="md:hidden p-2.5 rounded hover:bg-slate-100 dark:hover:bg-slate-800 min-w-[44px] min-h-[44px] flex items-center justify-center">
+            <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
         </div>
-      </nav>
+      </div>
     </header>
   );
 }
