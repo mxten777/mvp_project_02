@@ -1,6 +1,9 @@
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/layout/Header";
+import FloatingCTA from "@/components/ui/FloatingCTA";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,10 +28,12 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body
-        className={`min-h-screen w-full bg-gradient-to-br from-slate-100 via-white to-blue-50 text-slate-900 ${geistSans.variable} ${geistMono.variable} antialiased font-sans flex flex-col`}
+        className={`min-h-screen w-full bg-gradient-to-br from-slate-100 via-white to-blue-50 text-slate-900 dark:bg-gradient-to-br dark:from-slate-900 dark:via-slate-800 dark:to-blue-950 dark:text-slate-100 ${geistSans.variable} ${geistMono.variable} antialiased font-sans flex flex-col`}
         style={{ minHeight: '100dvh' }}
       >
-        <main className="flex-1 flex flex-col justify-center items-center w-full">
+        <Header />
+        <FloatingCTA />
+        <main className="flex-1 flex flex-col justify-center items-center w-full pt-20">
           {children}
         </main>
       </body>
