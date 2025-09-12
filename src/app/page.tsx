@@ -194,7 +194,7 @@ export default function AdminDashboard() {
         <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
           <h3 className="text-lg font-bold text-gray-900 mb-4">월별 주문 추이</h3>
           <div className="flex items-end gap-4 h-40 w-full">
-            {monthlyCounts.map((m, idx) => (
+            {monthlyCounts.map((m) => (
               <div key={m.label} className="flex flex-col items-center flex-1">
                 <div style={{height: `${m.count * 15}px`}} className="w-8 bg-blue-400 rounded-t-lg transition-all duration-500"></div>
                 <span className="mt-2 text-xs text-gray-500">{m.label}</span>
@@ -432,18 +432,15 @@ export default function AdminDashboard() {
               <div className="font-semibold mb-1">상태 변경 이력</div>
               {Array.isArray(detailModalData.statusHistory) && detailModalData.statusHistory.length > 0 ? (
                 <ul className="space-y-1 max-h-32 overflow-y-auto text-xs">
-                  {(detailModalData.statusHistory ?? []).map((h, idx) => {
-                    const hist = h as any;
-                    return (
-                      <li key={idx} className="flex items-center gap-2">
-                        <span className="font-semibold">{hist.status === 'pending' ? '대기중' : hist.status === 'processing' ? '처리중' : hist.status === 'completed' ? '완료' : hist.status === 'cancelled' ? '취소' : hist.status}</span>
-                        <span className="text-gray-400">{format(new Date(hist.changedAt), 'yyyy-MM-dd HH:mm', { locale: ko })}</span>
-                        {hist.admin && (
-                          <span className="ml-2 text-gray-500 text-xs">{hist.admin.name} ({hist.admin.email})</span>
-                        )}
-                      </li>
-                    );
-                  })}
+                  {(detailModalData.statusHistory ?? []).map((hist, i) => (
+                    <li key={i} className="flex items-center gap-2">
+                      <span className="font-semibold">{hist.status === 'pending' ? '대기중' : hist.status === 'processing' ? '처리중' : hist.status === 'completed' ? '완료' : hist.status === 'cancelled' ? '취소' : hist.status}</span>
+                      <span className="text-gray-400">{format(new Date(hist.changedAt), 'yyyy-MM-dd HH:mm', { locale: ko })}</span>
+                      {hist.admin && (
+                        <span className="ml-2 text-gray-500 text-xs">{hist.admin.name} ({hist.admin.email})</span>
+                      )}
+                    </li>
+                  ))}
                 </ul>
               ) : (
                 <span className="text-gray-400 text-xs">이력 없음</span>
@@ -467,18 +464,15 @@ export default function AdminDashboard() {
           <div className="bg-white rounded-lg shadow-lg w-full max-w-xs sm:max-w-md p-6 relative animate-fadeIn">
             <h4 className="text-lg font-bold mb-4">상태 변경 이력<br /><span className="text-xs font-normal text-gray-500">{historyModalData.companyName}</span></h4>
             <ul className="space-y-2 mb-6 max-h-60 overflow-y-auto">
-              {(historyModalData.statusHistory ?? []).map((h, idx) => {
-                const hist = h as any;
-                return (
-                  <li key={idx} className="flex items-center gap-2 text-sm">
-                    <span className="font-semibold">{hist.status === 'pending' ? '대기중' : hist.status === 'processing' ? '처리중' : hist.status === 'completed' ? '완료' : hist.status === 'cancelled' ? '취소' : hist.status}</span>
-                    <span className="text-gray-400">{format(new Date(hist.changedAt), 'yyyy-MM-dd HH:mm', { locale: ko })}</span>
-                    {hist.admin && (
-                      <span className="ml-2 text-gray-500 text-xs">{hist.admin.name} ({hist.admin.email})</span>
-                    )}
-                  </li>
-                );
-              })}
+              {(historyModalData.statusHistory ?? []).map((hist, i) => (
+                <li key={i} className="flex items-center gap-2 text-sm">
+                  <span className="font-semibold">{hist.status === 'pending' ? '대기중' : hist.status === 'processing' ? '처리중' : hist.status === 'completed' ? '완료' : hist.status === 'cancelled' ? '취소' : hist.status}</span>
+                  <span className="text-gray-400">{format(new Date(hist.changedAt), 'yyyy-MM-dd HH:mm', { locale: ko })}</span>
+                  {hist.admin && (
+                    <span className="ml-2 text-gray-500 text-xs">{hist.admin.name} ({hist.admin.email})</span>
+                  )}
+                </li>
+              ))}
             </ul>
             <button
               className="absolute top-2 right-2 text-gray-400 hover:text-gray-700 text-xl font-bold"
