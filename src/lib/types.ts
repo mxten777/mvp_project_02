@@ -13,6 +13,14 @@ export interface Order {
   status: 'pending' | 'processing' | 'completed' | 'cancelled';
   createdAt: Date;
   updatedAt: Date;
+  statusHistory?: Array<{
+    status: 'pending' | 'processing' | 'completed' | 'cancelled';
+    changedAt: Date;
+    admin?: {
+      email: string;
+      name: string;
+    };
+  }>;
 }
 
 export interface Company {

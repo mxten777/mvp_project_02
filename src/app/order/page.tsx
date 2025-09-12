@@ -8,6 +8,7 @@ import { db } from '@/lib/firebase';
 import { Order } from '@/lib/types';
 
 export default function OrderPage() {
+
   const [formData, setFormData] = useState({
     companyName: '',
     contactPerson: '',
@@ -18,9 +19,47 @@ export default function OrderPage() {
     installationDate: '',
     description: ''
   });
-  
+
+  const [errors, setErrors] = useState({
+    companyName: '',
+    contactPerson: '',
+    email: '',
+    phone: '',
+    equipmentName: ''
+  });
+
+  const [file, setFile] = useState<File | null>(null);
+  const [filePreview, setFilePreview] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  // 파일 첨부 핸들러
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selected = e.target.files?.[0] || null;
+    setFile(selected);
+    if (selected) {
+      setFilePreview(selected.name);
+    } else {
+      setFilePreview('');
+    }
+  };
+
+
+  const validate = (name: string, value: string) => {
+    switch (name) {
+      case 'companyName':
+        return value.trim() ? '' : '회사명을 입력해 주세요.';
+      case 'contactPerson':
+        return value.trim() ? '' : '담당자명을 입력해 주세요.';
+      case 'email':
+        return /^[\w-.]+@[\w-]+\.[a-zA-Z]{2,}$/.test(value) ? '' : '유효한 이메일을 입력해 주세요.';
+      case 'phone':
+        return /^01[016789]-?\d{3,4}-?\d{4}$/.test(value) ? '' : '유효한 연락처(예: 010-1234-5678)를 입력해 주세요.';
+      case 'equipmentName':
+        return value.trim() ? '' : '장비명/시스템명을 입력해 주세요.';
+      default:
+        return '';
+    }
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -28,35 +67,55 @@ export default function OrderPage() {
       ...prev,
       [name]: name === 'quantity' ? parseInt(value) : value
     }));
+    // 실시간 에러 메시지
+    if (name in errors) {
+      setErrors(prev => ({ ...prev, [name]: validate(name, value) }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
+    // 모든 필수 입력값 검증
+    const newErrors: typeof errors = {
+      companyName: validate('companyName', formData.companyName),
+      contactPerson: validate('contactPerson', formData.contactPerson),
+      email: validate('email', formData.email),
+      phone: validate('phone', formData.phone),
+      equipmentName: validate('equipmentName', formData.equipmentName)
+    };
+    setErrors(newErrors);
+    if (Object.values(newErrors).some(Boolean)) return;
 
+    setIsSubmitting(true);
     try {
-      // Firebase가 초기화되지 않은 경우 로컬 알림만 표시
       if (!db) {
         console.warn('Firebase가 설정되지 않았습니다. 데모 모드로 실행됩니다.');
-        // 데모 모드에서는 2초 후 성공으로 처리
         setTimeout(() => {
           setIsSubmitted(true);
         }, 2000);
         return;
       }
-
-      const orderData: Omit<Order, 'id'> = {
+      // 파일 첨부 처리(데모: base64 인코딩)
+      let fileData: string | undefined = undefined;
+      if (file) {
+        fileData = await new Promise<string>((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result as string);
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
+      }
+      const orderData: Omit<Order, 'id'> & { fileName?: string; fileData?: string } = {
         ...formData,
         status: 'pending',
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
+        ...(file ? { fileName: file.name, fileData } : {})
       };
-
       await addDoc(collection(db, 'orders'), orderData);
       setIsSubmitted(true);
     } catch (error) {
       console.error('주문 제출 중 오류가 발생했습니다:', error);
-      // 데모 모드에서는 성공으로 처리
       if (error instanceof Error && error.message?.includes('Firebase')) {
         console.warn('Firebase 연결 오류 - 데모 모드로 전환');
         setTimeout(() => {
@@ -132,9 +191,10 @@ export default function OrderPage() {
                     required
                     value={formData.companyName}
                     onChange={handleChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.companyName ? 'border-red-400' : 'border-gray-300'}`}
                     placeholder="회사명을 입력해 주세요"
                   />
+                  {errors.companyName && <p className="text-red-500 text-xs mt-1">{errors.companyName}</p>}
                 </div>
                 <div>
                   <label htmlFor="contactPerson" className="block text-sm font-medium text-gray-700 mb-2">
@@ -147,9 +207,10 @@ export default function OrderPage() {
                     required
                     value={formData.contactPerson}
                     onChange={handleChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.contactPerson ? 'border-red-400' : 'border-gray-300'}`}
                     placeholder="담당자명을 입력해 주세요"
                   />
+                  {errors.contactPerson && <p className="text-red-500 text-xs mt-1">{errors.contactPerson}</p>}
                 </div>
               </div>
             </div>
@@ -169,9 +230,10 @@ export default function OrderPage() {
                     required
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.email ? 'border-red-400' : 'border-gray-300'}`}
                     placeholder="example@company.com"
                   />
+                  {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
                 </div>
                 <div>
                   <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
@@ -184,9 +246,10 @@ export default function OrderPage() {
                     required
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.phone ? 'border-red-400' : 'border-gray-300'}`}
                     placeholder="010-1234-5678"
                   />
+                  {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
                 </div>
               </div>
             </div>
@@ -195,6 +258,24 @@ export default function OrderPage() {
             <div className="pb-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">주문 정보</h3>
               <div className="space-y-4">
+                {/* 파일 첨부 */}
+                <div>
+                  <label htmlFor="file" className="block text-sm font-medium text-gray-700 mb-2">
+                    첨부파일 (견적서, 도면 등)
+                  </label>
+                  <input
+                    type="file"
+                    id="file"
+                    name="file"
+                    accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.xls,.xlsx,.zip"
+                    onChange={handleFileChange}
+                    className="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                  />
+                  {filePreview && (
+                    <p className="text-blue-600 text-xs mt-1">첨부: {filePreview}</p>
+                  )}
+                  <p className="text-xs text-gray-400 mt-1">최대 10MB, PDF/이미지/문서/압축파일 지원</p>
+                </div>
                 <div>
                   <label htmlFor="equipmentName" className="block text-sm font-medium text-gray-700 mb-2">
                     장비명/시스템명 *
@@ -206,9 +287,10 @@ export default function OrderPage() {
                     required
                     value={formData.equipmentName}
                     onChange={handleChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.equipmentName ? 'border-red-400' : 'border-gray-300'}`}
                     placeholder="예: 공장모니터링시스템, PLC 설치 등"
                   />
+                  {errors.equipmentName && <p className="text-red-500 text-xs mt-1">{errors.equipmentName}</p>}
                 </div>
                 
                 <div className="grid md:grid-cols-2 gap-4">
