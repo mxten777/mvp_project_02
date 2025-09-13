@@ -4,53 +4,7 @@ import CountUp from "@/components/ui/CountUp";
 import DarkModeToggle from "@/components/ui/DarkModeToggle";
 
 export default function Page() {
-  // 언어 상태 및 다국어 텍스트
-  const [lang] = useState<"ko" | "en">("ko");
-  type LangKey =
-    | "trust"
-    | "trust1"
-    | "trust2"
-    | "trust3";
-  const t: Record<"ko" | "en", Record<LangKey, string>> = {
-    ko: {
-      trust: "신뢰와 함께하는 파트너",
-      trust1: "ISO 품질인증",
-      trust2: "산업통상자원부 인증",
-      trust3: "우수기업 선정",
-    },
-    en: {
-      trust: "Trusted Partners",
-      trust1: "ISO Certification",
-      trust2: "Ministry Approved",
-      trust3: "Excellence Award",
-    }
-  };
-
-  // 신뢰/고객사/수상 이미지
-  const customerImages = [
-    "/images/crystal-blue.jpg",
-    "/images/KakaoTalk_20250707_221323903.jpg",
-    "/images/pattern-01.jpg",
-    "/images/sphere-01.jpg",
-    "/images/fractal-01.jpg",
-    "/images/clock-01.jpg",
-    "/images/chart-01.jpg",
-    "/images/pinterest.jpg",
-    "/images/pattern-02.jpg",
-    "/images/pattern-03.jpg",
-    "/images/sphere-02.jpg",
-    "/images/sphere-03.jpg",
-    "/images/fractal-02.jpg",
-    "/images/ring-green.jpg",
-    "/images/clock-02.jpg",
-    "/images/KakaoTalk_20250708_082652734_01.jpg",
-    "/images/KakaoTalk_20250708_082652734_02.jpg",
-    "/images/KakaoTalk_20250708_082652734_03.jpg",
-    "/images/KakaoTalk_20250708_082652734.jpg",
-  ];
-  const customerFixed = customerImages.slice(0, 4);
-  const awardFixed = customerImages.slice(4, 7);
-  const trustKeys = ['trust1', 'trust2', 'trust3'] as const;
+  // ...existing code...
 
   // 주문 샘플 데이터 및 상태 관리
   const [orders, setOrders] = useState([
