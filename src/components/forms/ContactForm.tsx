@@ -50,11 +50,11 @@ export default function ContactForm({ lang = 'ko' }: ContactFormProps) {
     // 관리자 알림/이메일 발송 구조 (실제 연동 시 fetch("/api/contact", ...) 등 구현)
     try {
       // 1. reCAPTCHA 검증
-      // @ts-ignore
+      // @ts-expect-error - grecaptcha is loaded from external script
       if (window.grecaptcha) {
-        // @ts-ignore
+        // @ts-expect-error - grecaptcha is loaded from external script
         await window.grecaptcha.ready();
-        // @ts-ignore
+        // @ts-expect-error - grecaptcha is loaded from external script
         const token = await window.grecaptcha.execute("your_site_key", { action: "submit" });
         if (!token) {
           setError(t[lang].spamFail);
@@ -75,37 +75,37 @@ export default function ContactForm({ lang = 'ko' }: ContactFormProps) {
   }
 
   return (
-    <form ref={formRef} className="space-y-4 sm:space-y-5" onSubmit={handleSubmit}>
+  <form ref={formRef} className="space-y-5 sm:space-y-6" onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="name" className="block text-sm font-medium text-blue-900 mb-1">{t[lang].name}</label>
+        <label htmlFor="name" className="block text-base font-semibold text-blue-900 mb-2">{t[lang].name}</label>
         <input 
           type="text" 
           id="name" 
           name="name" 
           required 
-          className="w-full border border-blue-200 rounded-lg px-3 sm:px-4 py-2.5 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-300" 
+          className="w-full border border-blue-200 rounded-xl px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-blue-400 transition min-h-[44px]"
           placeholder={t[lang].namePh} 
         />
       </div>
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-blue-900 mb-1">{t[lang].email}</label>
+        <label htmlFor="email" className="block text-base font-semibold text-blue-900 mb-2">{t[lang].email}</label>
         <input 
           type="email" 
           id="email" 
           name="email" 
           required 
-          className="w-full border border-blue-200 rounded-lg px-3 sm:px-4 py-2.5 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-300" 
+          className="w-full border border-blue-200 rounded-xl px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-blue-400 transition min-h-[44px]"
           placeholder={t[lang].emailPh} 
         />
       </div>
       <div>
-        <label htmlFor="message" className="block text-sm font-medium text-blue-900 mb-1">{t[lang].message}</label>
+        <label htmlFor="message" className="block text-base font-semibold text-blue-900 mb-2">{t[lang].message}</label>
         <textarea 
           id="message" 
           name="message" 
           rows={4} 
           required 
-          className="w-full border border-blue-200 rounded-lg px-3 sm:px-4 py-2.5 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-300" 
+          className="w-full border border-blue-200 rounded-xl px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-blue-400 transition min-h-[44px] resize-none"
           placeholder={t[lang].messagePh} 
         />
       </div>
@@ -114,12 +114,12 @@ export default function ContactForm({ lang = 'ko' }: ContactFormProps) {
       <button 
         type="submit" 
         disabled={loading} 
-        className="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-2.5 sm:py-3 rounded-lg transition disabled:opacity-60 disabled:cursor-not-allowed text-sm sm:text-base mt-2"
+        className="w-full bg-blue-700 active:bg-blue-800 text-white font-bold py-3 rounded-xl transition disabled:opacity-60 disabled:cursor-not-allowed text-base min-h-[48px] mt-2 shadow-sm focus:ring-2 focus:ring-blue-400"
       >
         {loading ? t[lang].sending : t[lang].send}
       </button>
-      {success && <div className="text-green-600 text-xs sm:text-sm mt-2 text-center">{t[lang].success}</div>}
-      {error && <div className="text-red-600 text-xs sm:text-sm mt-2 text-center">{error}</div>}
+  {success && <div className="text-green-600 text-sm font-semibold mt-3 text-center leading-snug break-words">{t[lang].success}</div>}
+  {error && <div className="text-red-600 text-sm font-semibold mt-3 text-center leading-snug break-words">{error}</div>}
     </form>
   );
 }

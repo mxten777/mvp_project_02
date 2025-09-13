@@ -24,8 +24,9 @@ export default function NoticeList({ admin = false }: { admin?: boolean }) {
       const q = query(collection(db, "notice"), orderBy("date", "desc"));
       const snap = await getDocs(q);
       setNotices(snap.docs.map(doc => ({ id: doc.id, ...doc.data() } as NoticeItem)));
-    } catch (err: any) {
-      setError("공지/뉴스 불러오기 실패: " + (err?.message || ""));
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : "";
+      setError("공지/뉴스 불러오기 실패: " + (errorMessage || ""));
     } finally {
       setLoading(false);
     }
@@ -38,8 +39,9 @@ export default function NoticeList({ admin = false }: { admin?: boolean }) {
     try {
       await deleteDoc(doc(collection(db!, "notice"), id));
       setNotices(notices.filter(n => n.id !== id));
-    } catch (err: any) {
-      alert("삭제 실패: " + (err?.message || ""));
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : "";
+      alert("삭제 실패: " + (errorMessage || ""));
     }
   }
 

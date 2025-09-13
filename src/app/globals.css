@@ -3,4 +3,25 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 커스텀 글로벌 스타일 (필요시 추가) */
+/* ===== 만송시스템 글로벌 디자인 시스템 ===== */
+
+/* 1. 타이포그래피: heading/본문/링크 일관성 */
+h1, .h1 { @apply text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-blue-900; }
+h2, .h2 { @apply text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-blue-900; }
+h3, .h3 { @apply text-xl md:text-2xl font-bold text-blue-900; }
+h4, .h4 { @apply text-lg md:text-xl font-semibold text-blue-800; }
+p, .p { @apply text-base md:text-lg text-gray-700 leading-relaxed; }
+a { @apply text-blue-700 hover:text-blue-900 underline transition-colors; }
+
+/* 2. 컬러 시스템: Tailwind config 기반, 다크모드 지원 */
+body { @apply bg-gradient-to-br from-slate-100 via-white to-blue-50 text-slate-900 dark:bg-gradient-to-br dark:from-slate-900 dark:via-slate-800 dark:to-blue-950 dark:text-slate-100; }
+
+/* 3. 고해상도 이미지 최적화 가이드 (주석) */
+/*
+	- next/image 사용, width/height 명시, srcset/size 활용
+	- .img-hd 클래스: @apply rounded-xl shadow border border-blue-100 bg-white
+*/
+
+/* 4. 카드/섹션 공통 스타일 */
+.card { @apply bg-white rounded-2xl shadow-xl border border-blue-100; }
+.section { @apply max-w-6xl mx-auto px-4; }

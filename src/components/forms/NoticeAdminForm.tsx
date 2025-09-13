@@ -29,8 +29,9 @@ export default function NoticeAdminForm() {
       await addDoc(collection(db, "notice"), data);
       setSuccess(true);
       formRef.current?.reset();
-    } catch (err: any) {
-      setError("등록 중 오류가 발생했습니다." + (err?.message ? ` (${err.message})` : ""));
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : "알 수 없는 오류";
+      setError("등록 중 오류가 발생했습니다." + (errorMessage ? ` (${errorMessage})` : ""));
     } finally {
       setLoading(false);
     }
