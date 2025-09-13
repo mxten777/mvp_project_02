@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React from "react";
 
 interface ParallaxHeroProps {
   backgroundImage: string;
@@ -40,13 +40,11 @@ const ParallaxHero: React.FC<Omit<ParallaxHeroProps, "backgroundImage">> = ({
       {/* Content: 텍스트 쉐도우 강화 */}
       <div className="relative z-10 text-center px-4 sm:px-6 max-w-3xl mx-auto flex flex-col items-center">
         <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-blue-900 drop-shadow-[0_4px_24px_rgba(0,0,0,0.08)] mb-6 leading-tight tracking-tight">
-          <span className="block">공장 자동화와 관제 시스템의 미래,</span>
-          <span className="block mt-1">만송시스템</span>
+          {title}
         </h1>
         {subtitle && (
           <p className="text-lg sm:text-2xl md:text-3xl font-semibold text-blue-800 drop-shadow-[0_2px_8px_rgba(0,0,0,0.04)] mb-8 mt-0">
-            <span className="block">스마트팩토리, IoT, B2B 소프트웨어</span>
-            <span className="block mt-1">혁신 파트너</span>
+            {subtitle}
           </p>
         )}
         {children}

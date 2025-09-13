@@ -1,35 +1,10 @@
 "use client";
-
-
-
-
+import React from "react";
 import SectionFadeIn from "@/components/ui/SectionFadeIn";
 import ParallaxHero from "@/components/ui/ParallaxHero";
 import Image from "next/image";
-import React from "react";
 
 export default function Page() {
-  // 프로필 이미지: 이미지 없으면 기본 SVG 아이콘 표시
-  const ProfileImage = ({ src, alt }: { src: string; alt: string }) => {
-    const [error, setError] = React.useState(false);
-    return error ? (
-      <span className="rounded-full mb-4 w-[90px] h-[90px] flex items-center justify-center bg-blue-100 border-2 border-blue-200">
-        <svg width="48" height="48" fill="none" viewBox="0 0 48 48">
-          <circle cx="24" cy="24" r="24" fill="#DBEAFE" />
-          <path d="M24 25c3.314 0 6-2.686 6-6s-2.686-6-6-6-6 2.686-6 6 2.686 6 6 6zm0 2c-4.418 0-12 2.239-12 6.667V38h24v-4.333C36 29.239 28.418 27 24 27z" fill="#60A5FA" />
-        </svg>
-      </span>
-    ) : (
-      <Image
-        src={src}
-        alt={alt}
-        width={90}
-        height={90}
-        className="rounded-full mb-4 object-cover border-2 border-blue-200"
-        onError={() => setError(true)}
-      />
-    );
-  };
   // 언어 상태 설정
   const lang: "ko" | "en" = "ko";
 
@@ -164,27 +139,42 @@ export default function Page() {
         <section className="mt-8 sm:mt-12 md:mt-20 lg:mt-24 max-w-6xl mx-auto px-4">
           <h2 className="text-2xl md:text-4xl font-extrabold text-blue-900 mb-14 text-center whitespace-nowrap">만송시스템 팀 구성</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center items-stretch">
-            {/* 예시 팀원 카드 */}
-            <div className="w-full max-w-xs bg-white rounded-2xl shadow-lg px-8 py-10 flex flex-col items-center border border-blue-100">
-              <ProfileImage src="/images/watch-01.jpg" alt="임영무 대표" />
-              <div className="font-bold text-blue-800 text-xl mb-1">임영무</div>
-              <div className="text-base text-gray-500 mb-2">대표이사 / Founder</div>
-              <div className="text-gray-700 text-center text-sm leading-relaxed">스마트팩토리, 관제 시스템 전문가. 만송시스템 설립자.</div>
-            </div>
-            <div className="w-full max-w-xs bg-white rounded-2xl shadow-lg px-8 py-10 flex flex-col items-center border border-blue-100">
-              <ProfileImage src="/images/watch-02.jpg" alt="김지훈 CTO" />
-              <div className="font-bold text-blue-800 text-xl mb-1">김지훈</div>
-              <div className="text-base text-gray-500 mb-2">CTO / 개발총괄</div>
-              <div className="text-gray-700 text-center text-sm leading-relaxed">IoT, B2B 소프트웨어 아키텍트. 시스템 설계 및 개발 리드.</div>
-            </div>
-            <div className="w-full max-w-xs bg-white rounded-2xl shadow-lg px-8 py-10 flex flex-col items-center border border-blue-100">
-              <ProfileImage src="/images/watch-03.jpg" alt="박수진 팀장" />
-              <div className="font-bold text-blue-800 text-xl mb-1">박수진</div>
-              <div className="text-base text-gray-500 mb-2">팀장 / 프로젝트 매니저</div>
-              <div className="text-gray-700 text-center text-sm leading-relaxed">프로젝트 관리 및 고객 커뮤니케이션 담당.</div>
-            </div>
-
-            {/* 필요시 추가 팀원 카드 */}
+            {/* 고도화된 팀원 카드 */}
+            {[
+              {
+                name: "임영무",
+                role: "대표이사 / Founder",
+                desc: "스마트팩토리, 관제 시스템 전문가. 만송시스템 설립자.",
+              },
+              {
+                name: "김지훈",
+                role: "CTO / 개발총괄",
+                desc: "IoT, B2B 소프트웨어 아키텍트. 시스템 설계 및 개발 리드.",
+              },
+              {
+                name: "박수진",
+                role: "팀장 / 프로젝트 매니저",
+                desc: "프로젝트 관리 및 고객 커뮤니케이션 담당.",
+              },
+            ].map((member, idx) => (
+              <div
+                key={member.name}
+                className="w-full max-w-xs bg-white rounded-3xl shadow-xl px-10 py-12 flex flex-col items-center border border-blue-100 transition-all duration-300 hover:shadow-2xl hover:border-blue-300 hover:-translate-y-1 group"
+              >
+                <span className="relative flex items-center justify-center mb-6">
+                  <span className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-200 via-blue-400 to-blue-300 opacity-60 blur-xl scale-110 group-hover:opacity-80 group-hover:scale-125 transition-all duration-300"></span>
+                  <span className="rounded-full w-[104px] h-[104px] flex items-center justify-center bg-gradient-to-br from-blue-100 via-blue-200 to-blue-50 border-4 border-blue-200 shadow-lg group-hover:border-blue-400 transition-all duration-300">
+                    <svg width="60" height="60" fill="none" viewBox="0 0 48 48">
+                      <circle cx="24" cy="24" r="24" fill="#DBEAFE" />
+                      <path d="M24 25c3.314 0 6-2.686 6-6s-2.686-6-6-6-6 2.686-6 6 2.686 6 6 6zm0 2c-4.418 0-12 2.239-12 6.667V38h24v-4.333C36 29.239 28.418 27 24 27z" fill="#60A5FA" />
+                    </svg>
+                  </span>
+                </span>
+                <div className="font-extrabold text-blue-900 text-2xl mb-1 tracking-tight group-hover:text-blue-700 transition-colors">{member.name}</div>
+                <div className="text-base text-blue-500 font-semibold mb-2">{member.role}</div>
+                <div className="text-gray-700 text-center text-[15px] leading-relaxed font-normal">{member.desc}</div>
+              </div>
+            ))}
           </div>
         </section>
       </SectionFadeIn>
