@@ -147,7 +147,7 @@ export default function Page() {
                 desc: "스마트팩토리, 관제 시스템 전문가. 만송시스템 설립자.",
               },
               {
-                name: "김지훈",
+                name: "임동근",
                 role: "CTO / 개발총괄",
                 desc: "IoT, B2B 소프트웨어 아키텍트. 시스템 설계 및 개발 리드.",
               },
@@ -156,7 +156,7 @@ export default function Page() {
                 role: "팀장 / 프로젝트 매니저",
                 desc: "프로젝트 관리 및 고객 커뮤니케이션 담당.",
               },
-            ].map((member, idx) => (
+            ].map((member) => (
               <div
                 key={member.name}
                 className="w-full max-w-xs bg-white rounded-3xl shadow-xl px-10 py-12 flex flex-col items-center border border-blue-100 transition-all duration-300 hover:shadow-2xl hover:border-blue-300 hover:-translate-y-1 group"
