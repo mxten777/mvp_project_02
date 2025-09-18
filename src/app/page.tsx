@@ -85,7 +85,6 @@ export default function Page() {
 
   // 고정 이미지 배열 (hydration 오류 방지)
   const customerFixed = customerImages.slice(0, 4);
-  const awardFixed = customerImages.slice(4, 7);
 
 
   // 포트폴리오 데이터
