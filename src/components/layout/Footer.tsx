@@ -1,65 +1,50 @@
-import React from "react";
-import Link from "next/link";
-
 export default function Footer() {
   return (
-    <footer className="relative w-full bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 text-white mt-10 sm:mt-20 border-t border-blue-950 overflow-hidden">
-      {/* 배경 패턴 이미지 - 모바일에서는 더 작게 표시 */}
-      <img src="/images/pattern-01.jpg" alt="footer pattern" className="absolute left-0 top-0 w-1/2 h-full object-cover opacity-5 sm:opacity-10 pointer-events-none select-none" />
-      <img src="/images/pattern-02.jpg" alt="footer pattern" className="absolute right-0 bottom-0 w-1/4 sm:w-1/3 h-1/2 sm:h-2/3 object-cover opacity-5 sm:opacity-10 pointer-events-none select-none" />
-      {/* 데코레이션 이미지 - 모바일에서는 숨김 또는 축소 */}
-      <img src="/images/apple-green.jpg" alt="footer deco" className="hidden sm:block absolute left-10 bottom-4 w-16 sm:w-24 h-16 sm:h-24 object-contain opacity-20 sm:opacity-30 pointer-events-none select-none" />
-      <img src="/images/sphere-03.jpg" alt="footer deco" className="hidden sm:block absolute right-10 top-8 w-12 sm:w-20 h-12 sm:h-20 object-contain opacity-10 sm:opacity-20 pointer-events-none select-none" />
-      
-      <div className="relative max-w-7xl mx-auto px-4 py-8 sm:py-10 flex flex-col gap-8">
-        {/* 주요 푸터 콘텐츠 - 모바일에서는 스택 레이아웃 */}
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
-          {/* 회사 정보 */}
-          <div>
-            <div className="flex items-center gap-3 mb-3">
-              <img src="/file.svg" alt="만송시스템 로고" className="w-8 h-8" />
-              <span className="text-lg font-bold tracking-tight">만송시스템</span>
+    <footer className="w-full bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 flex flex-col items-center justify-center py-14 border-t border-blue-950 px-2 sm:px-4">
+      <div className="w-full max-w-3xl rounded-3xl shadow-2xl border border-blue-200/60 bg-white/80 backdrop-blur-lg p-6 sm:p-10 flex flex-col md:flex-row gap-8 md:gap-12 items-stretch overflow-hidden">
+        {/* Left: Logo & CEO (vertical, no overflow) */}
+        <div className="flex-1 flex flex-col items-center md:items-start justify-center gap-6 min-w-[180px] max-w-xs break-keep">
+          <div className="flex flex-col items-center md:items-start gap-2 mb-2">
+            <div className="flex gap-1">
+              <span className="text-4xl sm:text-5xl font-extrabold tracking-tight" style={{ color: '#e60012' }}>M</span>
+              <span className="text-4xl sm:text-5xl font-extrabold tracking-tight" style={{ color: '#0051c7' }}>S</span>
+              <span className="text-4xl sm:text-5xl font-extrabold tracking-tight" style={{ color: '#222' }}>S</span>
             </div>
-            <p className="text-sm text-blue-100 mb-1 leading-relaxed break-words">대표자: 임영무</p>
-            <p className="text-sm text-blue-100 mb-1 leading-relaxed break-words">사업자등록번호: 479-88-01974</p>
-            <p className="text-sm text-blue-100 mb-1 leading-relaxed break-words">업종: 컴퓨터 및 주변장치, 소프트웨어 도매업</p>
-            <p className="text-sm text-blue-100 mb-1 leading-relaxed break-words">특화: 공장 자동화 현장 모니터링, 관제 시스템</p>
+            <span className="text-2xl sm:text-3xl font-bold text-blue-900 whitespace-pre-line leading-tight text-center md:text-left">만송시스템(주)</span>
           </div>
-          
-          {/* 서비스/바로가기 */}
-          <div className="flex flex-col gap-2">
-            <span className="font-semibold mb-1 text-base">서비스</span>
-            <div className="flex flex-wrap gap-2">
-              <Link href="/" className="text-blue-100 text-sm active:underline px-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-blue-300">홈</Link>
-              <Link href="/order" className="text-blue-100 text-sm active:underline px-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-blue-300">주문</Link>
-              <Link href="/admin" className="text-blue-100 text-sm active:underline px-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-blue-300">관리자</Link>
-              <Link href="#contact" className="text-blue-100 text-sm active:underline px-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-blue-300">문의</Link>
+          <div className="flex items-center gap-2 text-blue-800 text-base sm:text-lg font-semibold whitespace-nowrap">
+            <svg className="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 15c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+            임 영무 / CEO
+          </div>
+        </div>
+        {/* Divider for desktop */}
+        <div className="hidden md:block w-px bg-blue-200/60 mx-2 my-2"></div>
+        {/* Right: 연락처 & 주소 (no overflow, word-break) */}
+        <div className="flex-1 flex flex-col items-center md:items-start justify-center gap-5 text-blue-900 text-base min-w-[200px] break-words">
+          <div className="flex items-start gap-2 md:justify-start justify-center w-full">
+            <svg className="w-5 h-5 text-blue-400 mt-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M21 10.5V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2h7.5" /><path strokeLinecap="round" strokeLinejoin="round" d="M21 10.5l-9 7.5-9-7.5" /></svg>
+            <div className="flex flex-col gap-0.5 w-full text-left">
+              <a href="mailto:limyoungmu@hanmail.net" className="hover:text-blue-600 font-medium break-all no-underline">limyoungmu@hanmail.net</a>
+              <a href="mailto:limyoungmoo@mansong.kr" className="hover:text-blue-600 font-medium break-all no-underline">limyoungmoo@mansong.kr</a>
             </div>
           </div>
-          
-          {/* 소셜/연락처 */}
-          <div className="flex flex-col gap-2">
-            <span className="font-semibold mb-1 text-base">Contact</span>
-            <a href="mailto:info@mansong.co.kr" className="flex items-center gap-3 text-blue-100 text-sm py-2 rounded-xl active:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-300 min-h-[44px]">
-              <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 6-8.97 6.66a2 2 0 0 1-2.06 0L2 6"/></svg>
-              info@mansong.co.kr
-            </a>
-            <a href="tel:010-1234-5678" className="flex items-center gap-3 text-blue-100 text-sm py-2 rounded-xl active:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-300 min-h-[44px]">
-              <svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.72 19.72 0 0 1 3.08 5.18 2 2 0 0 1 5 3h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.7 2.34a2 2 0 0 1-.45 2.11L9.03 10.97a16 16 0 0 0 6 6l1.8-1.22a2 2 0 0 1 2.11-.45c.74.34 1.53.57 2.34.7A2 2 0 0 1 22 16.92z"/></svg>
-              010-1234-5678
-            </a>
-            <div className="flex gap-4 mt-3">
-              <a href="#" className="rounded-full bg-white/10 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center active:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-300"><img src="/images/whatsapp-01.jpg" alt="WhatsApp" className="w-7 h-7 rounded" /></a>
-              <a href="#" className="rounded-full bg-white/10 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center active:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-300"><img src="/images/whatsapp-02.jpg" alt="WhatsApp" className="w-7 h-7 rounded" /></a>
-              <a href="#" className="rounded-full bg-white/10 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center active:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-300"><img src="/images/whatsapp-03.jpg" alt="WhatsApp" className="w-7 h-7 rounded" /></a>
+          <div className="flex items-center gap-2 flex-wrap">
+            <svg className="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M22 16.92v3a2 2 0 01-2.18 2A19.72 19.72 0 013.08 5.18 2 2 0 015 3h3a2 2 0 012 1.72c.13.81.36 1.6.7 2.34a2 2 0 01-.45 2.11L9.03 10.97a16 16 0 006 6l1.8-1.22a2 2 0 012.11-.45c.74.34 1.53.57 2.34.7A2 2 0 0122 16.92z" /></svg>
+            <span className="font-semibold text-blue-700 break-all">010-5264-8027</span>
+          </div>
+          <div className="flex items-start gap-2 mt-2 flex-wrap">
+            <svg className="w-5 h-5 text-blue-400 mt-0.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 12.414a2 2 0 00-2.828 0l-4.243 4.243A8 8 0 1116 8a7.963 7.963 0 01-1.343 4.657z" /></svg>
+            <div className="flex flex-col text-blue-900 gap-0.5 whitespace-pre-line">
+              <span className="font-semibold text-blue-700 text-base mb-1">주소</span>
+              <span>(31471) 충남 아산시 배방읍 광장로 210, B212호.</span>
+              <span>(44715) 울산광역시 남구 화합로 162, 나인파크 906호</span>
+              <span>NinePark 906, 162 Hwahap-ro, Nam-gu, Ulsan, Korea</span>
             </div>
           </div>
         </div>
-        
-        {/* 저작권 정보 - 모바일에서 중앙 정렬 */}
-        <div className="border-t border-blue-800 pt-4 mt-2 text-center">
-          <p className="text-xs text-blue-200 leading-relaxed">© 2021-2025 Mansong System. All rights reserved.</p>
-        </div>
+      </div>
+      <div className="w-full max-w-3xl text-center mt-8">
+        <p className="text-xs text-blue-300 leading-relaxed tracking-wide">만송시스템(주) &copy; {new Date().getFullYear()}. All rights reserved.</p>
       </div>
     </footer>
   );

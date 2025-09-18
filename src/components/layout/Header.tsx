@@ -32,7 +32,7 @@ export default function Header() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between h-20">
         {/* 로고 영역 */}
-        <Link href="/" className="flex items-center gap-3 group py-2.5 px-1 relative">
+        <Link href="/" className="flex items-center group py-2.5 px-1 relative">
           <div className="relative">
             <img 
               src="/baikal_logo.png" 
@@ -41,14 +41,6 @@ export default function Header() {
                 ${scrolled ? 'border-2 border-blue-300' : 'border-3 border-blue-200'}`} 
             />
             <div className="absolute inset-0 rounded-full bg-blue-500/10 animate-pulse-slow"></div>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-xl font-extrabold tracking-tight group-hover:text-blue-700 transition-colors">
-              만송시스템
-            </span>
-            <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
-              스마트팩토리 솔루션
-            </span>
           </div>
         </Link>
         

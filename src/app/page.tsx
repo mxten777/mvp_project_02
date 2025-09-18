@@ -116,7 +116,7 @@ export default function Page() {
     <main className="min-h-screen bg-gray-50 flex flex-col relative">
       {/* Parallax Hero (PC) */}
       <ParallaxHero
-        title="공장 자동화와 관제 시스템의 미래, 만송시스템"
+    title={<>산업의 내일을 설계하다<br />만송시스템</>}
         subtitle="스마트팩토리, IoT, B2B 소프트웨어의 혁신 파트너"
         height="520px"
       >
@@ -292,19 +292,7 @@ export default function Page() {
         </section>
       </SectionFadeIn>
 
-      {/* 푸터 */}
-      <footer className="w-full bg-blue-900 text-white py-8 mt-20">
-        <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="text-sm text-center md:text-left">
-            <span className="font-bold">만송시스템</span> &copy; 2021-2025. All rights reserved.<br />
-            사업자등록번호: 479-88-01974 | 대표: 임영무 | 업종: 소프트웨어 도매업
-          </div>
-          <div className="flex gap-4 text-sm">
-            <a href="mailto:info@mansong.co.kr" className="hover:underline">info@mansong.co.kr</a>
-            <a href="tel:010-1234-5678" className="hover:underline">010-1234-5678</a>
-          </div>
-        </div>
-      </footer>
+      {/* 푸터: 레거시 배경 완전 제거, 카드형 푸터만 남김 */}
     </main>
   );
 }

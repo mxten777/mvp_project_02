@@ -2,7 +2,7 @@ import React from "react";
 
 interface ParallaxHeroProps {
   backgroundImage: string;
-  title: string;
+  title: string | React.ReactNode;
   subtitle?: string;
   height?: string;
   children?: React.ReactNode;
@@ -39,7 +39,7 @@ const ParallaxHero: React.FC<Omit<ParallaxHeroProps, "backgroundImage">> = ({
       <div className="absolute inset-0 bg-white/40" aria-hidden="true" />
       {/* Content: 텍스트 쉐도우 강화 */}
       <div className="relative z-10 text-center px-4 sm:px-6 max-w-3xl mx-auto flex flex-col items-center">
-        <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-blue-900 drop-shadow-[0_4px_24px_rgba(0,0,0,0.08)] mb-6 leading-tight tracking-tight">
+        <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-blue-900 drop-shadow-[0_4px_24px_rgba(0,0,0,0.08)] mb-6 leading-snug tracking-tight whitespace-pre-line break-keep">
           {title}
         </h1>
         {subtitle && (
