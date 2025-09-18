@@ -6,7 +6,7 @@ export default function FloatingCTA() {
     <div className="fixed bottom-4 right-4 z-50 flex flex-row items-center sm:bottom-8 sm:right-8">
       <a
         href="#contact"
-        className="flex items-center gap-1 px-3 py-1.5 bg-blue-700 text-white font-bold rounded-full shadow-md hover:bg-blue-800 dark:bg-blue-900 dark:hover:bg-blue-800 transition text-xs sm:text-sm min-w-[80px] min-h-[36px]"
+  className="flex items-center gap-1 px-3 py-1.5 bg-gradient-to-r from-green-400 via-teal-400 to-purple-500 text-white font-bold rounded-full shadow-md hover:from-green-500 hover:to-purple-600 hover:text-white focus:text-white active:text-white transition text-xs sm:text-sm min-w-[80px] min-h-[36px] ring-2 ring-white"
         style={{ boxShadow: "0 2px 8px 0 rgba(30,64,175,0.10)" }}
         aria-label="문의/견적 요청"
       >

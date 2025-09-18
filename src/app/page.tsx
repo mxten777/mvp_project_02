@@ -1,8 +1,9 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import SectionFadeIn from "@/components/ui/SectionFadeIn";
 import ParallaxHero from "@/components/ui/ParallaxHero";
 import Image from "next/image";
+import PortfolioModal from "@/components/ui/PortfolioModal";
 
 export default function Page() {
   // 언어 상태 설정
@@ -112,11 +113,24 @@ export default function Page() {
     },
   ];
 
+  // 포트폴리오 상세 모달 상태
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalData, setModalData] = useState<null | typeof portfolioList[0]>(null);
+
+  const handleOpenModal = (item: typeof portfolioList[0]) => {
+    setModalData(item);
+    setModalOpen(true);
+  };
+  const handleCloseModal = () => {
+    setModalOpen(false);
+    setModalData(null);
+  };
+
   return (
     <main className="min-h-screen bg-gray-50 flex flex-col relative">
       {/* Parallax Hero (PC) */}
       <ParallaxHero
-    title={<>산업의 내일을 설계하다<br />만송시스템</>}
+        title={<>산업의 내일을 설계하다<br />만송시스템</>}
         subtitle="스마트팩토리, IoT, B2B 소프트웨어의 혁신 파트너"
         height="520px"
       >
@@ -269,10 +283,15 @@ export default function Page() {
                 <div className="text-blue-700 font-bold text-lg mb-1">{item.label}</div>
                 <div className="text-gray-900 font-semibold text-xl mb-2 text-center">{item.name}</div>
                 <div className="text-gray-600 text-base mb-3 text-center whitespace-pre-line">{item.desc}</div>
-                <details className="w-full mt-2">
-                  <summary className="cursor-pointer text-blue-500 underline text-sm text-center">상세보기</summary>
-                  <div className="text-gray-500 text-sm mt-2 whitespace-pre-line">{item.detail}</div>
-                </details>
+                <button
+                  className="w-full mt-2 flex items-center justify-center px-4 py-2 bg-gradient-to-r from-green-400 via-teal-400 to-purple-500 text-white font-bold rounded-lg shadow hover:from-green-500 hover:to-purple-600 active:from-green-600 active:to-purple-700 transition text-sm min-h-[36px]"
+                  onClick={() => handleOpenModal(item)}
+                  type="button"
+                >
+                  상세보기
+                </button>
+  {/* 포트폴리오 상세 모달 */}
+  <PortfolioModal open={modalOpen} onClose={handleCloseModal} data={modalData} />
               </div>
             ))}
           </div>

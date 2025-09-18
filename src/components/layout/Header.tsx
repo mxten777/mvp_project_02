@@ -85,14 +85,7 @@ export default function Header() {
         <div className="flex items-center gap-3">
           <LangToggle lang={lang} setLang={setLang} />
           <DarkModeToggle />
-          <Link 
-            href="#contact" 
-            className="ml-2 px-4 py-2.5 rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold 
-              shadow-md hover:shadow-lg hover:from-blue-700 hover:to-blue-600 
-              active:shadow-inner transition-all hidden sm:inline-block min-w-[90px] text-center"
-          >
-            상담 문의
-          </Link>
+
           
           {/* 모바일 메뉴 버튼 */}
           <button 

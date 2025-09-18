@@ -35,10 +35,18 @@ export default function Footer() {
           <div className="flex items-start gap-2 mt-2 flex-wrap">
             <svg className="w-5 h-5 text-blue-400 mt-0.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 12.414a2 2 0 00-2.828 0l-4.243 4.243A8 8 0 1116 8a7.963 7.963 0 01-1.343 4.657z" /></svg>
             <div className="flex flex-col text-blue-900 gap-0.5 whitespace-pre-line">
-              <span className="font-semibold text-blue-700 text-base mb-1">주소</span>
-              <span>(31471) 충남 아산시 배방읍 광장로 210, B212호.</span>
-              <span>(44715) 울산광역시 남구 화합로 162, 나인파크 906호</span>
-              <span>NinePark 906, 162 Hwahap-ro, Nam-gu, Ulsan, Korea</span>
+              <span className="font-semibold text-blue-700 text-base mb-1">찾아 오시는 길</span>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="inline-flex items-center justify-center w-5 h-5 text-green-600"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M12 21c-4.418 0-8-4.03-8-9a8 8 0 1116 0c0 4.97-3.582 9-8 9z" /><circle cx="12" cy="12" r="3" fill="currentColor" /></svg></span>
+                <span className="font-semibold text-blue-900">본사: (31471) 충남 아산시 배방읍 광장로 210, B212호</span>
+                <a href="https://map.naver.com/p/search/%EC%B6%A9%EB%82%A8%20%EC%95%84%EC%82%B0%EC%8B%9C%20%EB%B0%B0%EB%B0%A9%EC%9D%8D%20%EA%B4%91%EC%9E%A5%EB%A1%9C%20210%20B212%ED%98%B8" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline font-semibold ml-1 whitespace-nowrap">(네이버맵)</a>
+              </div>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="inline-flex items-center justify-center w-5 h-5 text-purple-600"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M12 21c-4.418 0-8-4.03-8-9a8 8 0 1116 0c0 4.97-3.582 9-8 9z" /><circle cx="12" cy="12" r="3" fill="currentColor" /></svg></span>
+                <span className="font-semibold text-blue-900">지사: (44715) 울산광역시 남구 화합로 162, 나인파크 906호</span>
+                <a href="https://map.naver.com/p/search/%EC%9A%B8%EC%82%B0%EA%B4%91%EC%97%AD%EC%8B%9C%20%EB%82%A8%EA%B5%AC%20%ED%99%94%ED%95%A9%EB%A1%9C%20162%20%EB%82%98%EC%9D%B8%ED%8C%8C%ED%81%AC%20906%ED%98%B8" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline font-semibold ml-1 whitespace-nowrap">(네이버맵)</a>
+              </div>
+              <span className="text-xs text-blue-400 mt-1">NinePark 906, 162 Hwahap-ro, Nam-gu, Ulsan, Korea</span>
             </div>
           </div>
         </div>
