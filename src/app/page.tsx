@@ -129,28 +129,32 @@ export default function Page() {
   return (
     <main className="min-h-screen bg-gray-50 flex flex-col relative">
       {/* Parallax Hero (PC) */}
-      <ParallaxHero
-        title={<>산업의 내일을 설계하다<br />만송시스템</>}
-        subtitle="스마트팩토리, IoT, B2B 소프트웨어의 혁신 파트너"
-        height="520px"
-      >
-        <div className="mt-6 flex flex-col items-center gap-2">
-          <span className="inline-block bg-blue-700/80 text-white text-xs md:text-sm font-semibold rounded-full px-4 py-1 mb-2 tracking-wide shadow">스마트팩토리 · 관제 · B2B</span>
-          <a
-            href="#contact"
-            className="inline-block px-6 py-2 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-bold rounded-lg shadow transition text-base md:text-lg min-w-[140px] min-h-[44px]"
-            tabIndex={0}
-            role="button"
-            aria-label="문의하기 (Hero)"
+  <div className="w-full min-h-[520px] bg-gradient-to-r from-green-200 via-teal-100 to-purple-200 flex items-center justify-center pb-16">
+        <div className="w-full">
+          <ParallaxHero
+            title={<>산업의 내일을 설계하다<br />만송시스템</>}
+            subtitle="스마트팩토리, IoT, B2B 소프트웨어의 혁신 파트너"
+            height="380px"
           >
-            문의하기
-          </a>
+            <div className="mt-6 flex flex-col items-center gap-2 text-white w-full py-4 rounded-b-3xl">
+              <span className="inline-block bg-blue-700/80 text-white text-xs md:text-sm font-semibold rounded-full px-4 py-1 mb-2 tracking-wide shadow">스마트팩토리 · 관제 · B2B</span>
+              <a
+                href="#contact"
+                className="inline-block px-6 py-2 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-bold rounded-lg shadow transition text-base md:text-lg min-w-[140px] min-h-[44px]"
+                tabIndex={0}
+                role="button"
+                aria-label="문의하기 (Hero)"
+              >
+                문의하기
+              </a>
+            </div>
+          </ParallaxHero>
         </div>
-      </ParallaxHero>
+      </div>
 
       {/* 대표/팀/조직도/채용 안내 */}
       <SectionFadeIn>
-        <section className="mt-8 sm:mt-12 md:mt-20 lg:mt-24 max-w-6xl mx-auto px-4">
+        <section className="mt-16 sm:mt-20 md:mt-28 lg:mt-32 max-w-6xl mx-auto px-4">
           <h2 className="text-2xl md:text-4xl font-extrabold text-blue-900 mb-14 text-center whitespace-nowrap">만송시스템 팀 구성</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center items-stretch">
             {/* 고도화된 팀원 카드 */}
@@ -244,30 +248,66 @@ export default function Page() {
 
       {/* 서비스/솔루션 섹션 */}
       <SectionFadeIn>
-        <section className="w-full max-w-6xl mx-auto py-20 px-4 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-          <div className="md:col-span-5 flex flex-col items-center md:items-start">
-            <h2 className="text-2xl md:text-4xl font-extrabold text-blue-900 mb-6 text-center md:text-left whitespace-nowrap">{t[lang].serviceTitle}</h2>
-            <ul className="space-y-3 w-full">
-              <li className="mb-2">
-                <span className="text-blue-700 font-bold text-lg">{t[lang].service1}</span>
-                <div className="text-gray-600 text-sm md:text-base mt-1">{t[lang].service1desc}</div>
-              </li>
-              <li className="mb-2">
-                <span className="text-blue-700 font-bold text-lg">{t[lang].service2}</span>
-                <div className="text-gray-600 text-sm md:text-base mt-1">{t[lang].service2desc}</div>
-              </li>
-              <li>
-                <span className="text-blue-700 font-bold text-lg">{t[lang].service3}</span>
-                <div className="text-gray-600 text-sm md:text-base mt-1">{t[lang].service3desc}</div>
-              </li>
-            </ul>
-          </div>
-          <div className="md:col-span-7 grid grid-cols-3 gap-4 justify-items-center items-center">
-            {awardFixed.map((img, i) => (
-              <div key={img} className="w-24 h-24 md:w-32 md:h-32 bg-white rounded-2xl shadow flex items-center justify-center overflow-hidden border border-blue-100">
-                <Image src={img} alt={`어워드${i + 1}`} width={96} height={96} className="object-cover w-full h-full" />
-              </div>
-            ))}
+        <section className="w-full max-w-6xl mx-auto py-20 px-4">
+          <h2 className="text-2xl md:text-4xl font-extrabold text-blue-900 mb-8 text-center md:text-left whitespace-nowrap">{t[lang].serviceTitle}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 justify-center">
+            {/* 서비스 카드 1 */}
+            <div id="service1" className="card flex flex-col items-center p-6 md:p-8 w-full max-w-xs min-w-[220px] min-h-[340px]">
+              <Image src="/images/pattern-01.jpg" alt="공장 모니터링" width={96} height={96} className="rounded-full mb-4 object-cover w-24 h-24" />
+              <div className="text-blue-700 font-bold text-lg mb-2 text-center break-words whitespace-normal w-full">{t[lang].service1}</div>
+              <div className="text-gray-600 text-base text-center mb-4 break-words whitespace-normal w-full">{t[lang].service1desc}</div>
+              <button
+                className="w-full mt-auto flex items-center justify-center px-4 py-2 bg-gradient-to-r from-green-400 via-teal-400 to-purple-500 text-white font-bold rounded-lg shadow hover:from-green-500 hover:to-purple-600 active:from-green-600 active:to-purple-700 transition text-sm min-h-[36px]"
+                onClick={() => handleOpenModal({
+                  logo: '/images/pattern-01.jpg',
+                  name: t[lang].service1,
+                  label: t[lang].service1,
+                  desc: t[lang].service1desc,
+                  detail: '공장 모니터링 상세 설명 및 주요 기능 안내\n- 실시간 데이터 수집\n- 대시보드 시각화\n- 알람 및 리포트 제공',
+                })}
+                type="button"
+              >
+                상세보기
+              </button>
+            </div>
+            {/* 서비스 카드 2 */}
+            <div id="service2" className="card flex flex-col items-center p-6 md:p-8 w-full max-w-xs min-w-[220px] min-h-[340px]">
+              <Image src="/images/pinterest.jpg" alt="관제 시스템" width={96} height={96} className="rounded-full mb-4 object-cover w-24 h-24" />
+              <div className="text-blue-700 font-bold text-lg mb-2 text-center break-words whitespace-normal w-full">{t[lang].service2}</div>
+              <div className="text-gray-600 text-base text-center mb-4 break-words whitespace-normal w-full">{t[lang].service2desc}</div>
+              <button
+                className="w-full mt-auto flex items-center justify-center px-4 py-2 bg-gradient-to-r from-green-400 via-teal-400 to-purple-500 text-white font-bold rounded-lg shadow hover:from-green-500 hover:to-purple-600 active:from-green-600 active:to-purple-700 transition text-sm min-h-[36px]"
+                onClick={() => handleOpenModal({
+                  logo: '/images/pinterest.jpg',
+                  name: t[lang].service2,
+                  label: t[lang].service2,
+                  desc: t[lang].service2desc,
+                  detail: '관제 시스템 상세 설명 및 주요 기능 안내\n- 통합 모니터링\n- 제어 시스템 연동\n- 실시간 알람 및 제어',
+                })}
+                type="button"
+              >
+                상세보기
+              </button>
+            </div>
+            {/* 서비스 카드 3 */}
+            <div id="service3" className="card flex flex-col items-center p-6 md:p-8 w-full max-w-xs min-w-[220px] min-h-[340px]">
+              <Image src="/images/art-01.jpg" alt="B2B 기술지원" width={96} height={96} className="rounded-full mb-4 object-cover w-24 h-24" />
+              <div className="text-blue-700 font-bold text-lg mb-2 text-center break-words whitespace-normal w-full">{t[lang].service3}</div>
+              <div className="text-gray-600 text-base text-center mb-4 break-words whitespace-normal w-full">{t[lang].service3desc}</div>
+              <button
+                className="w-full mt-auto flex items-center justify-center px-4 py-2 bg-gradient-to-r from-green-400 via-teal-400 to-purple-500 text-white font-bold rounded-lg shadow hover:from-green-500 hover:to-purple-600 active:from-green-600 active:to-purple-700 transition text-sm min-h-[36px]"
+                onClick={() => handleOpenModal({
+                  logo: '/images/art-01.jpg',
+                  name: t[lang].service3,
+                  label: t[lang].service3,
+                  desc: t[lang].service3desc,
+                  detail: 'B2B 기술지원 상세 설명 및 주요 기능 안내\n- 맞춤형 소프트웨어 개발\n- 기술 컨설팅\n- 유지보수 및 지원',
+                })}
+                type="button"
+              >
+                상세보기
+              </button>
+            </div>
           </div>
         </section>
       </SectionFadeIn>

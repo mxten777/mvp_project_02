@@ -3,7 +3,10 @@ import React, { useState } from "react";
 import Link from "next/link";
 
 // PC용 메가메뉴/드롭다운 구조 (예시)
-const menu = [
+type MenuChild = { label: string; href: string; desc?: string };
+type MenuItem = { label: string; href: string; children: MenuChild[] };
+
+const menu: MenuItem[] = [
   {
     label: "회사소개",
     href: "/#about",
@@ -17,9 +20,21 @@ const menu = [
     label: "서비스",
     href: "/#services",
     children: [
-      { label: "공장 모니터링", href: "/#service1" },
-      { label: "관제 시스템", href: "/#service2" },
-      { label: "B2B 기술지원", href: "/#service3" },
+      {
+        label: "공장 모니터링",
+        href: "/#service1",
+        desc: "실시간 공정 모니터링 및 데이터 시각화 솔루션"
+      },
+      {
+        label: "관제 시스템",
+        href: "/#service2",
+        desc: "통합 모니터링 및 제어 시스템 구축"
+      },
+      {
+        label: "B2B 기술지원",
+        href: "/#service3",
+        desc: "맞춤형 소프트웨어 개발 및 기술 컨설팅"
+      },
     ],
   },
   {
@@ -54,13 +69,17 @@ export default function PcMegaMenu() {
           {item.children.length > 0 && openIdx === idx && (
             <div className="absolute left-0 top-full mt-2 min-w-[180px] bg-white border border-blue-100 rounded-lg shadow-lg py-2 flex flex-col animate-fadeIn">
               {item.children.map((child) => (
-                <Link
-                  key={child.label}
-                  href={child.href}
-                  className="px-4 py-2 hover:bg-blue-50 hover:text-blue-700 transition-colors duration-100 whitespace-nowrap"
-                >
-                  {child.label}
-                </Link>
+                <div key={child.label} className="flex flex-col px-4 py-2 hover:bg-blue-50 hover:text-blue-700 transition-colors duration-100">
+                  <Link
+                    href={child.href}
+                    className="font-semibold text-base text-blue-800 hover:text-blue-700 whitespace-nowrap"
+                  >
+                    {child.label}
+                  </Link>
+                  {child.desc && (
+                    <span className="text-xs text-gray-500 mt-0.5 ml-1 whitespace-pre-line">{child.desc}</span>
+                  )}
+                </div>
               ))}
             </div>
           )}
